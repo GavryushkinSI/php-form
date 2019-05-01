@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+
+
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+
+<!--		Form message fixed-->
+	
+	<div class="message_box">
+		<div class="container">
+		<div class="row ">
+		<div class="panel panel-info col-lg-3  col-md-3 col-sm-3 col-lg-push-9  panel-modif_2">
+		<div class="panel-heading panel-modif ">
+		    <h5 class="panel-title"><a href="#">Отправить сообщение</a></h5>
+		  </div>
+		  <div class="panel-body">
+		<form  id="form" method="POST">
+		  
+		      	 <div class="form-group">
+		        <input type="text" name="email" id="recipient-mail" class="email form-control" placeholder=" Ваш e-mail" required>
+		    	</div>
+		    	<div class="form-group">
+		      <input type="text" name="title" class="name form-control" placeholder="Тема сообщения" required>
+		        </div>
+		        <div class="form-group">
+		        <textarea name="message" id="message-text" class="message form-control" placeholder="Сообщение" required></textarea>
+		         </div>
+		      <!--   <div class="form-group form-control">
+		         	 <input type="file">
+		         </div> -->
+		    
+		  	<button style ="margin-bottom: 5px" type="submit" class="btn btn-success pull-left">Отправить</button>
+		  	 	<button style = "margin-bottom: 5px"  id="close" type="button" class="btn btn-danger pull-right">Закрыть</button>
+		  
+		    	
+		  
+		</form>
+		</div>
+		</div>
+		</div>
+		</div>
+	</div>
+
+
+
+
+
+	<script src="jquery.min.js"></script>
+	<script src="js/viewportChecker.js"></script>
+	<script>
+		$(document).ready(function() {
+			
+		
+			(function () {
+        $('form').submit(function () {
+            var formID = $(this).attr('id'); // Получение ID формы
+            var formNm = $('#' + formID);
+            $.ajax({
+                type: 'POST',
+                url: 'post.php', // Обработчик формы отправки
+                data: formNm.serialize(),
+                success: function (data) {
+                    // Вывод текста результата отправки в текущей форме
+					
+                    $(formNm).html(data);
+					$(".panel-body").on('click',function(){
+					$(".panel-body").hide(300);
+					});
+					
+					
+					}
+					
+                
+            });
+            return false;
+        });
+    }());
+			
+			
+			
+		}());
+		
+	</script>
+	
+
+</body>
+</html>
